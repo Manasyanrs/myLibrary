@@ -1,0 +1,36 @@
+.indexHead {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    align-items: center;
+}
+
+.loginReg {
+    display: flex;
+    justify-content: end;
+
+}
+
+.correctLoginHead {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.correctUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+td, th, tr {
+    border: 1px solid #000;
+}
+
+table {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
