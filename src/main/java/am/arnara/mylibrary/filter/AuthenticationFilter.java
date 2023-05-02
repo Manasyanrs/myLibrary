@@ -1,7 +1,6 @@
 package am.arnara.mylibrary.filter;
 
 import am.arnara.mylibrary.model.User;
-import am.arnara.mylibrary.model.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

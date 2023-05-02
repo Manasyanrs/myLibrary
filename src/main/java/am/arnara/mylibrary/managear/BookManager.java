@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookManager {
-    private final Connection CONNECTION = DBConnectionProvider.getInstance().getConnection();
-    private final AuthorManager AUTHOR_MANAGER = new AuthorManager();
-    private final UserManager USER_MANAGER = new UserManager();
+    private static final Connection CONNECTION = DBConnectionProvider.getInstance().getConnection();
+    private static final AuthorManager AUTHOR_MANAGER = new AuthorManager();
+    private static final UserManager USER_MANAGER = new UserManager();
 
     public List<Book> searchBook(String searchParam) {
         List<Book> books = new ArrayList<>();
@@ -41,16 +41,6 @@ public class BookManager {
             e.printStackTrace();
         }
         return books;
-    }
-
-    public boolean isCorrectPriceType(String price) {
-        try {
-            Double.parseDouble(price);
-            return true;
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public void addBook(Book book) {

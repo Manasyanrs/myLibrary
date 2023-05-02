@@ -14,8 +14,8 @@ import java.io.IOException;
 
 @WebServlet("/loginUser")
 public class LoginServlet extends HttpServlet {
-    private final UserManager USER_MANAGER = new UserManager();
-    private final BookManager BOOK_MANAGER = new BookManager();
+    private static final UserManager USER_MANAGER = new UserManager();
+    private static final BookManager BOOK_MANAGER = new BookManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

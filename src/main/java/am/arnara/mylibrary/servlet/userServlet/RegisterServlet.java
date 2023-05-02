@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @WebServlet("/registerUser")
 public class RegisterServlet extends HttpServlet {
-    private UserManager userManager = new UserManager();
+    private static final UserManager USER_MANAGER = new UserManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = userManager.loginUser(email, password);
+        User user = USER_MANAGER.loginUser(email, password);
         if (user == null) {
             User userBuild = User.builder()
                     .name(req.getParameter("name"))
@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
                     .password(password)
                     .userType(UserType.valueOf(req.getParameter("userType")))
                     .build();
-            userManager.registerUser(userBuild);
+            USER_MANAGER.registerUser(userBuild);
 
             req.getSession().setAttribute("user", userBuild);
             resp.sendRedirect("/");

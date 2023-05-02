@@ -2,6 +2,7 @@ package am.arnara.mylibrary.servlet.authorServlet;
 
 import am.arnara.mylibrary.managear.AuthorManager;
 import am.arnara.mylibrary.model.Author;
+import am.arnara.mylibrary.utils.IsDigit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import java.io.IOException;
 
 @WebServlet("/addAuthor")
 public class AddAuthor extends HttpServlet {
-    private final AuthorManager AUTHOR_MANAGER = new AuthorManager();
+    private static final AuthorManager AUTHOR_MANAGER = new AuthorManager();
 
 
     @Override
@@ -27,8 +28,16 @@ public class AddAuthor extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String age = req.getParameter("age");
-
-        if (AUTHOR_MANAGER.inputAgeType(age)) {
+        IsDigit isDigit = (digit) -> {
+            try {
+                Integer.parseInt(digit);
+                return true;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            return false;
+        };
+        if (isDigit.isDigit(age)) {
             if (!AUTHOR_MANAGER.isAuthorInDB(email)) {
                 Author buildAuthor = Author.builder()
                         .name(req.getParameter("name"))
@@ -49,7 +58,5 @@ public class AddAuthor extends HttpServlet {
             session.setAttribute("msg", "Author's age cannot be a string. Please enter a number.");
             resp.sendRedirect("/addAuthor");
         }
-
-
     }
 }

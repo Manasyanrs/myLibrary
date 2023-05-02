@@ -5,6 +5,7 @@ import am.arnara.mylibrary.managear.BookManager;
 import am.arnara.mylibrary.model.Author;
 import am.arnara.mylibrary.model.Book;
 import am.arnara.mylibrary.model.User;
+import am.arnara.mylibrary.utils.IsDigit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,8 +22,8 @@ import java.util.List;
         fileSizeThreshold = 4096
 )
 public class AddBook extends HttpServlet {
-    private final BookManager BOOK_MANAGER = new BookManager();
-    private final AuthorManager AUTHOR_MANAGER = new AuthorManager();
+    private static final BookManager BOOK_MANAGER = new BookManager();
+    private static final AuthorManager AUTHOR_MANAGER = new AuthorManager();
     private static final String UPLOAD_FILES = "/home/radik/IdeaProjects/jakartaProjects/myLibrary/images/";
 
 
@@ -39,7 +40,17 @@ public class AddBook extends HttpServlet {
         String price = req.getParameter("price");
         String picName = null;
 
-        if (BOOK_MANAGER.isCorrectPriceType(price)) {
+        IsDigit isDigit = (digit) -> {
+            try {
+                Double.parseDouble(digit);
+                return true;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            return false;
+        };
+
+        if (isDigit.isDigit(price)) {
             Author authorByID = AUTHOR_MANAGER.getAuthorByID(Integer.parseInt(req.getParameter("authorId")));
             User user = (User) req.getSession().getAttribute("user");
             Part faceBookImg = req.getPart("faceBookImg");
@@ -59,9 +70,9 @@ public class AddBook extends HttpServlet {
                     .bookImg(picName)
                     .build();
             BOOK_MANAGER.addBook(buildBook);
-            if (user.getUserType().name().equals("ADMIN")){
+            if (user.getUserType().name().equals("ADMIN")) {
                 req.getSession().setAttribute("userAddBooks", BOOK_MANAGER.getBooks());
-            }else {
+            } else {
                 req.getSession().setAttribute("userAddBooks", BOOK_MANAGER.showBooksByUserId(user.getId()));
             }
             resp.sendRedirect("/");

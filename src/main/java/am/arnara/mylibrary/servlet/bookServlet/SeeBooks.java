@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/books")
 public class SeeBooks extends HttpServlet {
-    private final BookManager BOOk_MANAGER = new BookManager();
+    private static final BookManager BOOk_MANAGER = new BookManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

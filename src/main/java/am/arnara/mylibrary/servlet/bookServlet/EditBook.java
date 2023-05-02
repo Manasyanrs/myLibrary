@@ -5,6 +5,7 @@ import am.arnara.mylibrary.managear.BookManager;
 import am.arnara.mylibrary.model.Author;
 import am.arnara.mylibrary.model.Book;
 import am.arnara.mylibrary.model.User;
+import am.arnara.mylibrary.utils.IsDigit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,8 +26,8 @@ import java.util.List;
 public class EditBook extends HttpServlet {
     private static final String UPLOAD_FILES = "/home/radik/IdeaProjects/jakartaProjects/myLibrary/images/";
 
-    private final AuthorManager AUTHOR_MANAGER = new AuthorManager();
-    private final BookManager BOOK_MANAGER = new BookManager();
+    private static final AuthorManager AUTHOR_MANAGER = new AuthorManager();
+    private static final BookManager BOOK_MANAGER = new BookManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,7 +57,17 @@ public class EditBook extends HttpServlet {
             faceBookImg.write(UPLOAD_FILES + picName);
         }
 
-        if (BOOK_MANAGER.isCorrectPriceType(price)) {
+        IsDigit isDigit = (digit) -> {
+            try {
+                Double.parseDouble(digit);
+                return true;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            return false;
+        };
+
+        if (isDigit.isDigit(price)) {
             Author authorByID = AUTHOR_MANAGER.getAuthorByID(Integer.parseInt(req.getParameter("authorId")));
             BOOK_MANAGER.updateBookData(
                     Book.builder()

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/deleteAuthor")
 public class DeleteAuthor extends HttpServlet {
-    private final AuthorManager AUTHOR_MANAGER = new AuthorManager();
+    private static final AuthorManager AUTHOR_MANAGER = new AuthorManager();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorManager {
-    private final Connection CONNECTION = DBConnectionProvider.getInstance().getConnection();
+    private static final Connection CONNECTION = DBConnectionProvider.getInstance().getConnection();
 
     public void updateAuthorData(Author author) {
         String sql = "update authors set name=?, surname=?, email=?, age=? where id=?";
@@ -45,16 +45,6 @@ public class AuthorManager {
             e.printStackTrace();
         }
         return author;
-    }
-
-    public boolean inputAgeType(String age) {
-        try {
-            Integer.parseInt(age);
-            return true;
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public boolean isAuthorInDB(String email) {

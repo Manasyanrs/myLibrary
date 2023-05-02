@@ -2,6 +2,7 @@ package am.arnara.mylibrary.servlet.authorServlet;
 
 import am.arnara.mylibrary.managear.AuthorManager;
 import am.arnara.mylibrary.model.Author;
+import am.arnara.mylibrary.utils.IsDigit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet("/editAuthor")
 public class EditAuthor extends HttpServlet {
-    private final AuthorManager AUTHOR_MANAGER = new AuthorManager();
+    private static final AuthorManager AUTHOR_MANAGER = new AuthorManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +30,17 @@ public class EditAuthor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String age = req.getParameter("age");
-        if (AUTHOR_MANAGER.inputAgeType(age)) {
+
+        IsDigit isDigit = (digit) -> {
+            try {
+                Integer.parseInt(digit);
+                return true;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            return false;
+        };
+        if (isDigit.isDigit(age)) {
             AUTHOR_MANAGER.updateAuthorData(
                     Author.builder()
                             .id(Integer.parseInt(req.getParameter("id")))

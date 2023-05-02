@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/deleteBook")
 public class DeleteBook extends HttpServlet {
-    private final BookManager BOOK_MANAGER = new BookManager();
+    private static final BookManager BOOK_MANAGER = new BookManager();
 
 
     @Override
