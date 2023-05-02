@@ -1,5 +1,5 @@
-<%@ page import="am.arnara.mylibrary.models.Author" %>
-<%@ page import="am.arnara.mylibrary.models.Book" %>
+<%@ page import="am.arnara.mylibrary.model.Author" %>
+<%@ page import="am.arnara.mylibrary.model.Book" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: radik
@@ -30,12 +30,22 @@
 <% session.removeAttribute("msg");
 }%>
 <div>
-    <form method="post" action="/editBook">
+    <form method="post" action="/editBook" enctype="multipart/form-data">
         <table>
+            <tr>
+                <td>Facebook img:</td>
+                <img src="/img?picName=<%=bookByID.getBookImg()%>" width="150px"/>
+
+
+                <td>
+                    <input type="file" name="faceBookImg">
+                </td>
+            </tr>
             <tr>
                 <td>Book title:</td>
                 <td>
-                    <input type="text" name="title" placeholder="Book title:" required value="<%=bookByID.getTitle()%>">
+                    <input type="text" name="title" placeholder="Book title:" required value="<%=bookByID.getTitle()%>"
+                           selected>
                 </td>
             </tr>
             <tr>

@@ -1,6 +1,6 @@
-package am.arnara.mylibrary.servlets.authorServlet;
+package am.arnara.mylibrary.servlet.authorServlet;
 
-import am.arnara.mylibrary.managears.AuthorManager;
+import am.arnara.mylibrary.managear.AuthorManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

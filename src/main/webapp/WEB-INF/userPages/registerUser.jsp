@@ -53,6 +53,16 @@
                 </td>
             </tr>
 
+            <tr>
+                <td> User type:</td>
+                <td>
+                    <select name="userType">
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </td>
+            </tr>
+
         </table>
         <br>
 

@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="am.arnara.mylibrary.models.Author" %><%--
+<%@ page import="am.arnara.mylibrary.model.Author" %>
+<%@ page import="am.arnara.mylibrary.model.User" %><%--
   Created by IntelliJ IDEA.
   User: radik
   Date: 28.04.23
@@ -7,7 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%List<Author> authors = (List<Author>) request.getAttribute("authors");%>
+<%List<Author> authors = (List<Author>) request.getAttribute("authors");
+    User user = (User) session.getAttribute("user");
+%>
 <html>
 <head>
     <link rel="stylesheet" href="../../styles/homepageStyles.css">
@@ -24,7 +27,9 @@
         <th>Surname</th>
         <th>Email</th>
         <th>age</th>
-        <th>Action</th>
+        <%if (!user.getUserType().name().equals("USER")) {%>
+            <th>Action</th>
+        <%}%>
     </tr>
 
     <%if (authors != null && !authors.isEmpty()) {%>
@@ -41,12 +46,16 @@
         </td>
         <td><%=author.getAge()%>
         </td>
-        <td>
-            <form method="post">
-                <button formmethod="get" formaction="/editAuthor" name="id" value="<%=author.getId()%>">Edit</button>
-                <button formaction="/deleteAuthor?id=<%=author.getId()%>">Delete</button>
-            </form>
-        </td>
+        <%if (!user.getUserType().name().equals("USER")) {%>
+
+            <td>
+                <form method="post">
+                    <button formmethod="get" formaction="/editAuthor" name="id" value="<%=author.getId()%>">Edit</button>
+                    <button formaction="/deleteAuthor?id=<%=author.getId()%>">Delete</button>
+                </form>
+            </td>
+        <%}%>
+
     </tr>
     <%}%>
     <%} else {%>

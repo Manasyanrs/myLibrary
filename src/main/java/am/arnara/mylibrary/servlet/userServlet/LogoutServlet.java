@@ -1,6 +1,4 @@
-package am.arnara.mylibrary.servlets.bookServlet;
-
-import am.arnara.mylibrary.managears.BookManager;
+package am.arnara.mylibrary.servlet.userServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,15 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/deleteBook")
-public class DeleteBook extends HttpServlet {
-    private final BookManager BOOk_MANAGER = new BookManager();
 
-
+@WebServlet("/logoutUser")
+public class LogoutServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int bookId = Integer.parseInt(req.getParameter("id"));
-        BOOk_MANAGER.deleteBookById(bookId);
-        resp.sendRedirect("/books");
+        req.getSession().invalidate();
+        resp.sendRedirect("/");
     }
 }

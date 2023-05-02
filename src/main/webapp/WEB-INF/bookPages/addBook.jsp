@@ -1,4 +1,4 @@
-<%@ page import="am.arnara.mylibrary.models.Author" %>
+<%@ page import="am.arnara.mylibrary.model.Author" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: radik
@@ -25,7 +25,7 @@
 <%}%>
 
 <div>
-    <form method="post" action="/addBook">
+    <form method="post" action="/addBook" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>Book title:</td>
@@ -58,6 +58,12 @@
                         <%}%>
                         <%}%>
                     </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Facebook img:</td>
+                <td>
+                    <input type="file" name="faceBookImg">
                 </td>
             </tr>
 

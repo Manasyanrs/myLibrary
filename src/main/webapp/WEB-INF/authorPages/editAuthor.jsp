@@ -1,4 +1,4 @@
-<%@ page import="am.arnara.mylibrary.models.Author" %><%--
+<%@ page import="am.arnara.mylibrary.model.Author" %><%--
   Created by IntelliJ IDEA.
   User: radik
   Date: 28.04.23

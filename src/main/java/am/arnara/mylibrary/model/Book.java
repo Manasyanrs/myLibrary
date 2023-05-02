@@ -1,6 +1,5 @@
-package am.arnara.mylibrary.models;
+package am.arnara.mylibrary.model;
 
-import am.arnara.mylibrary.models.Author;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +14,7 @@ public class Book {
     private String title;
     private String description;
     private double price;
-    private Author author_id;
+    private String bookImg;
+    private Author authorId;
+    private User userId;
 }

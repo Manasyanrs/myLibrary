@@ -1,6 +1,7 @@
 package am.arnara.mylibrary.filter;
 
-import am.arnara.mylibrary.models.User;
+import am.arnara.mylibrary.model.User;
+import am.arnara.mylibrary.model.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -17,6 +18,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+
         if (user == null) {
             response.sendRedirect("/");
         } else {

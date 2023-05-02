@@ -1,4 +1,4 @@
-package am.arnara.mylibrary.models;
+package am.arnara.mylibrary.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

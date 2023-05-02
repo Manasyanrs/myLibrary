@@ -1,7 +1,7 @@
-package am.arnara.mylibrary.managears;
+package am.arnara.mylibrary.managear;
 
 import am.arnara.mylibrary.db.DBConnectionProvider;
-import am.arnara.mylibrary.models.Author;
+import am.arnara.mylibrary.model.Author;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,8 @@
-package am.arnara.mylibrary.servlets.userServlet;
+package am.arnara.mylibrary.servlet.userServlet;
 
-import am.arnara.mylibrary.managears.UserManager;
-import am.arnara.mylibrary.models.User;
+import am.arnara.mylibrary.managear.UserManager;
+import am.arnara.mylibrary.model.User;
+import am.arnara.mylibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +35,7 @@ public class RegisterServlet extends HttpServlet {
                     .surname(req.getParameter("surname"))
                     .email(email)
                     .password(password)
+                    .userType(UserType.valueOf(req.getParameter("userType")))
                     .build();
             userManager.registerUser(userBuild);
 

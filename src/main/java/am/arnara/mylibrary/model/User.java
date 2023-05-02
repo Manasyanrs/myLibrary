@@ -1,4 +1,4 @@
-package am.arnara.mylibrary.models;
+package am.arnara.mylibrary.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,4 +15,5 @@ public class User {
     private String surname;
     private String email;
     private String password;
+    private UserType userType;
 }
